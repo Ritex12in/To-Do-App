@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:to_do_app/auth/auth_page.dart';
 
 import '../const/colors.dart';
 import '../widgets/stream_note.dart';
@@ -21,14 +23,32 @@ class _Home_ScreenState extends State<Home_Screen> {
       backgroundColor: backgroundColors,
       floatingActionButton: Visibility(
         visible: show,
-        child: FloatingActionButton(
-          onPressed: () {
+        child: GestureDetector(
+          onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => Add_creen(),
             ));
           },
-          backgroundColor: custom_green,
-          child: Icon(Icons.add, size: 30),
+          onLongPress: () async {
+            try {
+              await FirebaseAuth.instance.signOut();
+              print("User signed out successfully.");
+              // Navigate to Auth_Page
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Auth_Page()),
+              );
+            } catch (e) {
+              print("Error signing out: $e");
+            }
+          },
+          child: FloatingActionButton(
+            onPressed: () {},
+            backgroundColor: custom_green,
+            child: const Icon(
+              Icons.add,
+              size: 30,
+            ),
+          ),
         ),
       ),
       body: SafeArea(

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'auth/main_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   Firebase.initializeApp();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Main_Page()
+        debugShowCheckedModeBanner: false,
+        home: Main_Page()
     );
   }
 }
