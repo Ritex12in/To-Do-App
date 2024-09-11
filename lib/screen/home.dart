@@ -24,11 +24,7 @@ class _Home_ScreenState extends State<Home_Screen> {
       floatingActionButton: Visibility(
         visible: show,
         child: GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => Add_creen(),
-            ));
-          },
+
           onLongPress: () async {
             try {
               await FirebaseAuth.instance.signOut();
@@ -42,7 +38,11 @@ class _Home_ScreenState extends State<Home_Screen> {
             }
           },
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const Add_creen(),
+              ));
+            },
             backgroundColor: custom_green,
             child: const Icon(
               Icons.add,
